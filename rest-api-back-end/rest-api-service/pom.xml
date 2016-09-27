@@ -35,7 +35,7 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>myApp-data</artifactId>
+			<artifactId>rest-api-data</artifactId>
 			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
