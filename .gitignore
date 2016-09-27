@@ -1,0 +1,16 @@
+# Eclipse
+.classpath
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+target
+.metadata
+Servers
+RemoteSystemsTempFiles
