@@ -19,5 +19,5 @@ script:
 - mvn clean install -f ./rest-api-back-end/rest-api-parent/pom.xml
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - codacy-coverage-reporter -l Java -r ./rest-api-back-end/rest-api-parent/target/site/cobertura/coverage.xml
+  - codacy-coverage-reporter -l Java -r ./rest-api-back-end/rest-api-webapp/target/site/cobertura/coverage.xml
 email : false
