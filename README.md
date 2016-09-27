@@ -1,4 +1,8 @@
 # REST-API-STARTER
+[![Build Status](https://travis-ci.org/haddouti-khalid/REST-API-STARTER.svg?branch=master)](https://travis-ci.org/haddouti-khalid/REST-API-STARTER)
+[![codecov](https://codecov.io/gh/haddouti-khalid/REST-API-STARTER/branch/master/graph/badge.svg)](https://codecov.io/gh/haddouti-khalid/REST-API-STARTER)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/662db2383c764d1da9fca90b4534ce68)](https://www.codacy.com/app/haddouti-khalid/REST-API-STARTER?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=haddouti-khalid/REST-API-STARTER&amp;utm_campaign=Badge_Grade)
+
 This project is a complet technical solution for achieving a REST API plateform.
 This solution includes :
 ```
@@ -79,7 +83,7 @@ Be sure that your JAVA_HOME environment variable points to the jdk1.7.0 folder e
 1. Check that all unit tests are OK.
 2. Start the Tomcat server and send the following request using Postman extension:
 ```
-GET http://localhost:8080/XXXXx/me 
+GET http://localhost:9090/myApp/rest-api/me
 ```
 With HTTP Header 
 ```
@@ -90,7 +94,17 @@ Accept : application/json
 
 ## Default Rest resources
 The REST-API-STARTER provides the following preconfigured resources  :
-
+```
+GET     /books/?                bookController.all
+GET    	/books/{id}/? 			bookController.get
+POST    /books/?                bookController.create
+PUT     /books/{id}/?           bookController.update
+DELETE  /books/{id}/?           bookController.delete
+GET     /me/?                	meController.get
+POST    /errors/?               errorController.create
+GET     /i18n/?              	i18nController.get
+GET     /configurations/?     	configurationController.get
+```
 ## Commands:
 * Package the application for Dev
 ```
@@ -105,7 +119,7 @@ mvn clean install -Ppackage
 If you find a bug in the source code or a mistake in the documentation, you can help us by submitting a ticket to our <GitHub issues>
 
 ## Contributing
-[Pull requests][] are welcome
+[Pull requests][] are welcome.
 
 
 [Pull requests]: https://help.github.com/categories/collaborating-on-projects-using-issues-and-pull-requests/
