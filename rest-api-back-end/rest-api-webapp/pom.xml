@@ -57,7 +57,7 @@
 		<!-- Projects Dependencies -->
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>myApp-service</artifactId>
+			<artifactId>rest-api-service</artifactId>
 		</dependency>
 
 		<!-- Test librairies -->
@@ -69,7 +69,7 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>myApp-data</artifactId>
+			<artifactId>rest-api-data</artifactId>
 			<version>${project.version}</version>
 			<type>test-jar</type>
 			<scope>test</scope>
