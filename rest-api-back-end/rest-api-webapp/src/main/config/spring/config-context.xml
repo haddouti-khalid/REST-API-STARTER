@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<beans>
+
+		<context:component-scan
+			base-package="com.sqli.commons.core.config.log" />
+
+
+
+		<!-- Define event bus for use with GuavaPropertyChangedEventNotifier -->
+		<bean class="com.google.common.eventbus.EventBus" id="propertiesEventBus" />
+
+		<bean
+			class="com.sqli.commons.core.config.core.properties.conversion.DefaultPropertyConversionService"
+			id="defaultPropertyConversionService" />
+
+		<bean
+			class="com.sqli.commons.core.config.core.properties.event.GuavaPropertyChangedEventNotifier"
+			autowire="constructor" id="eventNotifier">
+			<constructor-arg ref="propertiesEventBus" />
+		</bean>
+
+		<bean
+			class="com.sqli.commons.core.config.core.properties.resolver.SubstitutingPropertyResolver"
+			id="propertyResolver" />
+
+		<bean
+			class="com.sqli.commons.core.config.core.properties.internal.ReloadablePropertyPostProcessor">
+			<constructor-arg ref="propertyConfigurator" />
+			<constructor-arg ref="eventNotifier" />
+			<constructor-arg ref="defaultPropertyConversionService" />
+		</bean>
+
+		<bean id="propertyConfigurator"
+			class="com.sqli.commons.core.config.configuration.ReloadablePlaceholderConfig">
+			<property name="ignoreUnresolvablePlaceholders" value="false" />
+			<property name="ignoreResourceNotFound" value="true" />
+			<constructor-arg ref="eventNotifier" />
+			<constructor-arg ref="propertyResolver" />
+			<property name="locations">
+				<list>
+					<value>config.properties</value>
+					<value>config-front.properties</value>
+				</list>
+			</property>
+		</bean>
+	</beans>
+</beans>

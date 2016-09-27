@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:javaee="http://java.sun.com/xml/ns/javaee"
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	version="2.4">
+	<display-name>myApp</display-name>
+
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring/application-context.xml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>log4jExposeWebAppRoot</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>spring.profiles.active</param-name>
+		<param-value>prod</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>springMVCServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring/servlet-context.xml, classpath:spring/persistence-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>springMVCServlet</servlet-name>
+		<url-pattern>/rest-api/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- CORS filter -->
+	<filter>
+		<filter-name>corsFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>corsFilter</filter-name>
+		<url-pattern>/rest-api/*</url-pattern>
+	</filter-mapping>
+
+	<!-- HTTP Filter -->
+	<filter>
+		<filter-name>httpFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>httpFilter</filter-name>
+		<url-pattern>/rest-api/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Expire Filter -->
+	<filter>
+		<filter-name>expireFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>expireFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Spring security entry point -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/rest-api/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Security Role -->
+	<security-role>
+		<role-name>ADMIN</role-name>
+	</security-role>
+	<security-role>
+		<role-name>CUSTOMER</role-name>
+	</security-role>
+
+	<!-- Security constraint -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>myApp requires authentication</web-resource-name>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>ADMIN</role-name>
+			<role-name>CUSTOMER</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<!-- Tomcat Authentication -->
+	<login-config>
+    	<auth-method>BASIC</auth-method> 
+    	<realm-name>Authentication for my secured application</realm-name>
+	</login-config>
+
+</web-app>

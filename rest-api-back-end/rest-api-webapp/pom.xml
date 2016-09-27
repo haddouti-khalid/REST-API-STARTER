@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.sqli.myApp</groupId>
+		<artifactId>rest-api-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../rest-api-parent</relativePath>
+	</parent>
+
+	<artifactId>rest-api-webapp</artifactId>
+	<packaging>war</packaging>
+	<name>Rest - API - Backend - Webapp</name>
+
+	<developers>
+		<developer>
+			<name>Khalid HADDOUTI</name>
+			<email>haddouti.khalid@gmail.com</email>
+		</developer>
+	</developers>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.resthub</groupId>
+			<artifactId>springmvc-router</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Projects Dependencies -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>myApp-service</artifactId>
+		</dependency>
+
+		<!-- Test librairies -->
+		<dependency>
+			<groupId>com.sqli.commons</groupId>
+			<artifactId>rest-api-commons-test</artifactId>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>myApp-data</artifactId>
+			<version>${project.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<configuration>
+						<outputFileNameMapping>@{artifactId}@.@{extension}@</outputFileNameMapping>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ear-plugin</artifactId>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<configuration>
+						<downloadSources>true</downloadSources>
+						<downloadJavadocs>true</downloadJavadocs>
+						<additionalProjectnatures>
+							<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+							<projectnature>org.eclipse.wst.common.project.facet.core.nature</projectnature>
+							<projectnature>org.eclipse.wst.jsdt.core.jsNature</projectnature>
+						</additionalProjectnatures>
+						<additionalBuildcommands>
+							<buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
+							<buildcommand>org.eclipse.wst.common.project.facet.core.builder</buildcommand>
+							<buildcommand>org.eclipse.wst.validation.validationbuilder</buildcommand>
+							<buildcommand>org.eclipse.wst.jsdt.core.javascriptValidator</buildcommand>
+						</additionalBuildcommands>
+						<wtpversion>2.0</wtpversion>
+						<wtpContextName>myApp</wtpContextName>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<application.context>myApp</application.context>
+				<jndi.name>jdbc/com.sqli.jdbc.myApp</jndi.name>
+			</properties>
+			<build>
+				<finalName>myApp</finalName>
+				<resources>
+					<resource>
+						<directory>${basedir}/src/main/java</directory>
+						<includes>
+							<include>**/*.properties</include>
+						</includes>
+					</resource>
+					<resource>
+						<directory>${basedir}/src/main/config</directory>
+						<includes>
+							<include>**/*</include>
+						</includes>
+						<filtering>true</filtering>
+					</resource>
+					<resource>
+						<directory>${basedir}/src/main/resources</directory>
+						<includes>
+							<include>**/*.properties</include>
+						</includes>
+						<filtering>true</filtering>
+					</resource>
+					<resource>
+						<directory>${basedir}/src/main/resources</directory>
+						<includes>
+							<include>**/*.xml</include>
+						</includes>
+						<filtering>true</filtering>
+					</resource>
+					<resource>
+						<directory>${basedir}/src/main/resources</directory>
+						<includes>
+							<include>**/*.conf</include>
+						</includes>
+					</resource>
+					<resource>
+						<directory>${basedir}/src/main/packaging</directory>
+						<excludes>
+							<exclude>**/*</exclude>
+						</excludes>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<profile>
+			<id>package</id>
+			<properties>
+				<application.context>myApp</application.context>
+				<jndi.name>jdbc/com.sqli.jdbc.myApp</jndi.name>
+			</properties>
+			<build>
+				<resources>
+					<resource>
+						<directory>${basedir}/src/main/java</directory>
+						<includes>
+							<include>**/*.properties</include>
+						</includes>
+					</resource>
+					<resource>
+						<directory>${basedir}/src/main/config</directory>
+						<includes>
+							<include>**/*</include>
+						</includes>
+						<filtering>true</filtering>
+					</resource>
+					<resource>
+						<directory>${basedir}/src/main/resources</directory>
+						<includes>
+							<include>**/*.properties</include>
+						</includes>
+						<filtering>true</filtering>
+					</resource>
+					<resource>
+						<directory>${basedir}/src/main/resources</directory>
+						<includes>
+							<include>**/*.xml</include>
+						</includes>
+						<filtering>true</filtering>
+					</resource>
+					<resource>
+						<directory>${basedir}/src/main/resources</directory>
+						<includes>
+							<include>**/*.conf</include>
+						</includes>
+					</resource>
+					<resource>
+						<directory>${basedir}/src/main/packaging</directory>
+						<excludes>
+							<exclude>**/*</exclude>
+						</excludes>
+					</resource>
+				</resources>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-war-plugin</artifactId>
+							<configuration>
+								<warName>${application.context}</warName>
+								<webResources>
+									<resource>
+										<directory>${basedir}/src/main/webapp-content</directory>
+									</resource>
+								</webResources>
+								<webXml>${basedir}/src/main/webapp/WEB-INF/prod_web.xml</webXml>
+							</configuration>
+						</plugin>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-assembly-plugin</artifactId>
+							<executions>
+								<execution>
+									<id>make-assembly-package</id>
+									<phase>package</phase>
+									<goals>
+										<goal>single</goal>
+									</goals>
+									<configuration>
+										<descriptors>
+											<descriptor>src/main/packaging/package-assembly.xml</descriptor>
+										</descriptors>
+										<appendAssemblyId>false</appendAssemblyId>
+										<finalName>${application.context}</finalName>
+									</configuration>
+								</execution>
+							</executions>
+						</plugin>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-antrun-plugin</artifactId>
+							<executions>
+								<execution>
+									<phase>package</phase>
+									<configuration>
+										<target>
+											<copy file="target/${application.context}.zip" tofile="target/${application.context}.ear" />
+										</target>
+									</configuration>
+									<goals>
+										<goal>run</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-assembly-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.groovy.maven</groupId>
+						<artifactId>gmaven-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>validate</phase>
+								<goals>
+									<goal>execute</goal>
+								</goals>
+								<configuration>
+									<source>
+										import java.util.Date
+										import java.text.MessageFormat
+										def
+										vartimestamp =
+										MessageFormat.format("{0,date,yyyy.MM.dd.HH.mm.ss}", new
+										Date())
+										project.properties['buildtimestampfull'] = vartimestamp
+										vartimestamp = MessageFormat.format("{0,date,yyyyMMdd}", new
+										Date())
+										project.properties['buildtimestamp'] = vartimestamp
+									</source>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>

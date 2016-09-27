@@ -1,0 +1,1166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sqli.myApp</groupId>
+	<artifactId>rest-api-parent</artifactId>
+	<packaging>pom</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Rest - API - Backend</name>
+
+	<developers>
+		<developer>
+			<name>Khalid HADDOUTI</name>
+			<email>haddouti.khalid@gmail.com</email>
+		</developer>
+	</developers>
+
+	<modules>
+		<module>../rest-api-data</module>
+		<module>../rest-api-service</module>
+		<module>../rest-api-webapp</module>
+	</modules>
+
+	<properties>
+		<!-- - Common properties -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.jdk.version>1.6</java.jdk.version>
+		<maven.version>3.0.5</maven.version>
+
+		<!-- - Dependencies versions -->
+		<logback.version>1.1.2</logback.version>
+		<spring.version>4.1.7.RELEASE</spring.version>
+		<spring-security.version>4.0.1.RELEASE</spring-security.version>
+		<hibernate.version>4.3.10.Final</hibernate.version>
+
+		<commons-core.version>0.0.1</commons-core.version>
+		<commons-test.version>0.0.1</commons-test.version>
+
+		<cglib.version>2.2.2</cglib.version>
+		<c3p0.version>0.9.1.2</c3p0.version>
+		<commons-lang.version>3.3</commons-lang.version>
+		<persistence.version>1.0.2</persistence.version>
+		<slf4j.version>1.7.6</slf4j.version>
+		<dbunit.version>2.4.9</dbunit.version>
+		<hsqldb.version>2.2.4</hsqldb.version>
+		<commons-io.version>2.4</commons-io.version>
+		<commons-dbcp.version>1.4</commons-dbcp.version>
+		<javax.servlet.version>2.5</javax.servlet.version>
+		<commons-fileupload.version>1.3</commons-fileupload.version>
+		<springmvc-router.version>1.2.0</springmvc-router.version>
+		<json-path.version>0.9.1</json-path.version>
+		<javax.servlet-api.version>3.0.1</javax.servlet-api.version>
+		<x-doc-report.version>1.0.5</x-doc-report.version>
+		<!-- - Plug-in versions -->
+		<maven-enforcer-plugin.version>1.0</maven-enforcer-plugin.version>
+		<maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
+		<maven-eclipse-plugin.version>2.9</maven-eclipse-plugin.version>
+		<maven-clean-plugin.version>2.4.1</maven-clean-plugin.version>
+		<maven-deploy-plugin.version>2.5</maven-deploy-plugin.version>
+		<maven-install-plugin.version>2.3.1</maven-install-plugin.version>
+		<maven-site-plugin.version>3.3</maven-site-plugin.version>
+		<maven-resources-plugin.version>2.5</maven-resources-plugin.version>
+		<maven-surefire-plugin.version>2.10</maven-surefire-plugin.version>
+		<maven-war-plugin.version>2.1.1</maven-war-plugin.version>
+		<maven-ear-plugin.version>2.8</maven-ear-plugin.version>
+		<maven-jar-plugin.version>2.3.1</maven-jar-plugin.version>
+		<maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
+		<maven-scm-plugin.version>1.6</maven-scm-plugin.version>
+		<maven-dependency-plugin.version>2.2</maven-dependency-plugin.version>
+		<maven-release-plugin.version>2.1</maven-release-plugin.version>
+		<maven-scm-provider-svnjava.version>1.12</maven-scm-provider-svnjava.version>
+		<maven-cobertura-plugin.version>2.5.2</maven-cobertura-plugin.version>
+		<maven-build-helper-plugin.version>1.5</maven-build-helper-plugin.version>
+		<maven-assembly-plugin.version>2.3</maven-assembly-plugin.version>
+		<maven-license-validator-plugin.version>0.3</maven-license-validator-plugin.version>
+		<maven-antrun-plugin.version>1.7</maven-antrun-plugin.version>
+		<maven-groovy-plugin.version>1.0</maven-groovy-plugin.version>
+		<findbugs-maven-plugin.version>2.0.1</findbugs-maven-plugin.version>
+
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Logging Dependencies -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>log4j-over-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+
+			<!-- DB Dependencies -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-entitymanager</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hsqldb</groupId>
+				<artifactId>hsqldb-j5</artifactId>
+				<version>${hsqldb.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>c3p0</groupId>
+				<artifactId>c3p0</artifactId>
+				<version>${c3p0.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-dbcp</groupId>
+				<artifactId>commons-dbcp</artifactId>
+				<version>${commons-dbcp.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons-io.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.dbunit</groupId>
+				<artifactId>dbunit</artifactId>
+				<version>${dbunit.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.resthub</groupId>
+				<artifactId>springmvc-router</artifactId>
+				<version>${springmvc-router.version}</version>
+			</dependency>
+
+			<!-- Spring Security Dependencies -->
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-web</artifactId>
+				<version>${spring-security.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-config</artifactId>
+				<version>${spring-security.version}</version>
+			</dependency>
+
+			<!-- Spring Dependencies -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-expression</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<!-- Other Dependencies -->
+			<dependency>
+				<groupId>com.jayway.jsonpath</groupId>
+				<artifactId>json-path</artifactId>
+				<version>${json-path.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>${commons-fileupload.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib-nodep</artifactId>
+				<version>${cglib.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sqli.commons</groupId>
+				<artifactId>rest-api-commons-core</artifactId>
+				<version>${commons-core.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-core</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>ch.qos.logback</groupId>
+						<artifactId>logback-classic</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.hibernate</groupId>
+						<artifactId>hibernate</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.hibernate</groupId>
+						<artifactId>hibernate-entitymanager</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>javax.persistence</groupId>
+						<artifactId>persistence-api</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>com.sqli.commons</groupId>
+				<artifactId>rest-api-commons-test</artifactId>
+				<version>${commons-test.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons-lang.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.persistence</groupId>
+				<artifactId>persistence-api</artifactId>
+				<version>${persistence.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>${javax.servlet.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${javax.servlet-api.version}</version>
+			</dependency>
+
+			<!-- Projects Dependencies -->
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>myApp-data</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>myApp-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>myApp-webapp</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<!-- Logging Dependencies -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+
+		<!-- Spring Dependencies -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Test Librairies -->
+		<dependency>
+			<groupId>com.sqli.commons</groupId>
+			<artifactId>rest-api-commons-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Other Dependencies -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<pluginManagement>
+			<!-- configuration des plugins -->
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.groovy.maven</groupId>
+					<artifactId>gmaven-plugin</artifactId>
+					<version>${maven-groovy-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>${maven-dependency-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${maven-clean-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${maven-deploy-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>${maven-install-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>${maven-site-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven-resources-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${maven-javadoc-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-scm-plugin</artifactId>
+					<version>${maven-scm-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${maven-war-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ear-plugin</artifactId>
+					<version>${maven-ear-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>${maven-jar-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+					<configuration>
+						<source>${java.jdk.version}</source>
+						<target>${java.jdk.version}</target>
+						<encoding>${project.build.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-enforcer-plugin</artifactId>
+					<version>${maven-enforcer-plugin.version}</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>enforce</goal>
+							</goals>
+							<configuration>
+								<rules>
+									<!-- always specify a plugin version -->
+									<requireJavaVersion>
+										<version>${java.jdk.version}</version>
+									</requireJavaVersion>
+									<requireMavenVersion>
+										<version>${maven.version}</version>
+									</requireMavenVersion>
+								</rules>
+								<!-- skip all check rules (if true) -->
+								<skip>false</skip>
+								<!-- build fails if check rule fails (if true) -->
+								<fail>false</fail>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<version>${maven-eclipse-plugin.version}</version>
+					<configuration>
+						<downloadSources>true</downloadSources>
+						<downloadJavadocs>true</downloadJavadocs>
+						<additionalProjectnatures>
+							<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+						</additionalProjectnatures>
+						<additionalBuildcommands>
+							<buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
+						</additionalBuildcommands>
+						<additionalConfig>
+							<file>
+								<name>.settings/net.sf.jautodoc.prefs</name>
+								<content>
+									<![CDATA[add_todo=false
+eclipse.preferences.version=1
+project_specific_settings=true
+replacements=<?xml version\="1.0" standalone\="yes"?>\n\n<replacements>\n<replacement key\="get" scope\="1" mode\="0">Gets the</replacement>\n<replacement key\="set" scope\="1" mode\="0">Sets the</replacement>\n<replacement key\="add" scope\="1" mode\="0">Adds the</replacement>\n<replacement key\="edit" scope\="1" mode\="0">Edits the</replacement>\n<replacement key\="remove" scope\="1" mode\="0">Removes the</replacement>\n<replacement key\="init" scope\="1" mode\="0">Inits the</replacement>\n<replacement key\="parse" scope\="1" mode\="0">Parses the</replacement>\n<replacement key\="create" scope\="1" mode\="0">Creates the</replacement>\n<replacement key\="build" scope\="1" mode\="0">Builds the</replacement>\n<replacement key\="is" scope\="1" mode\="0">Checks if is</replacement>\n<replacement key\="print" scope\="1" mode\="0">Prints the</replacement>\n<replacement key\="has" scope\="1" mode\="0">Checks for</replacement>\n</replacements>\n\n
+				]]>
+								</content>
+							</file>
+
+							<file>
+								<name>.settings/org.eclipse.core.resources.prefs</name>
+								<content>
+									<![CDATA[eclipse.preferences.version=1
+									encoding/<project>=UTF-8]]>
+								</content>
+							</file>
+							<file>
+								<name>.settings/org.eclipse.jdt.ui.prefs</name>
+								<content><![CDATA[
+eclipse.preferences.version=1
+editor_save_participant_org.eclipse.jdt.ui.postsavelistener.cleanup=true
+formatter_settings_version=12
+sp_cleanup.add_default_serial_version_id=true
+sp_cleanup.add_generated_serial_version_id=false
+sp_cleanup.add_missing_annotations=true
+sp_cleanup.add_missing_deprecated_annotations=true
+sp_cleanup.add_missing_methods=false
+sp_cleanup.add_missing_nls_tags=false
+sp_cleanup.add_missing_override_annotations=true
+sp_cleanup.add_missing_override_annotations_interface_methods=true
+sp_cleanup.add_serial_version_id=false
+sp_cleanup.always_use_blocks=true
+sp_cleanup.always_use_parentheses_in_expressions=false
+sp_cleanup.always_use_this_for_non_static_field_access=false
+sp_cleanup.always_use_this_for_non_static_method_access=false
+sp_cleanup.convert_functional_interfaces=false
+sp_cleanup.convert_to_enhanced_for_loop=false
+sp_cleanup.correct_indentation=false
+sp_cleanup.format_source_code=true
+sp_cleanup.format_source_code_changes_only=false
+sp_cleanup.insert_inferred_type_arguments=false
+sp_cleanup.make_local_variable_final=false
+sp_cleanup.make_parameters_final=false
+sp_cleanup.make_private_fields_final=true
+sp_cleanup.make_type_abstract_if_missing_method=false
+sp_cleanup.make_variable_declarations_final=true
+sp_cleanup.never_use_blocks=false
+sp_cleanup.never_use_parentheses_in_expressions=true
+sp_cleanup.on_save_use_additional_actions=false
+sp_cleanup.organize_imports=true
+sp_cleanup.qualify_static_field_accesses_with_declaring_class=false
+sp_cleanup.qualify_static_member_accesses_through_instances_with_declaring_class=true
+sp_cleanup.qualify_static_member_accesses_through_subtypes_with_declaring_class=true
+sp_cleanup.qualify_static_member_accesses_with_declaring_class=false
+sp_cleanup.qualify_static_method_accesses_with_declaring_class=false
+sp_cleanup.remove_private_constructors=true
+sp_cleanup.remove_redundant_type_arguments=false
+sp_cleanup.remove_trailing_whitespaces=false
+sp_cleanup.remove_trailing_whitespaces_all=true
+sp_cleanup.remove_trailing_whitespaces_ignore_empty=false
+sp_cleanup.remove_unnecessary_casts=true
+sp_cleanup.remove_unnecessary_nls_tags=false
+sp_cleanup.remove_unused_imports=false
+sp_cleanup.remove_unused_local_variables=false
+sp_cleanup.remove_unused_private_fields=true
+sp_cleanup.remove_unused_private_members=false
+sp_cleanup.remove_unused_private_methods=true
+sp_cleanup.remove_unused_private_types=true
+sp_cleanup.sort_members=false
+sp_cleanup.sort_members_all=false
+sp_cleanup.use_anonymous_class_creation=false
+sp_cleanup.use_blocks=false
+sp_cleanup.use_blocks_only_for_return_and_throw=false
+sp_cleanup.use_lambda=false
+sp_cleanup.use_parentheses_in_expressions=false
+sp_cleanup.use_this_for_non_static_field_access=false
+sp_cleanup.use_this_for_non_static_field_access_only_if_necessary=true
+sp_cleanup.use_this_for_non_static_method_access=false
+sp_cleanup.use_this_for_non_static_method_access_only_if_necessary=true
+sp_cleanup.use_type_arguments=false
+sp_jautodoc.cleanup.add_header=false
+sp_jautodoc.cleanup.replace_header=false
+
+				                ]]>
+								</content>
+							</file>
+							<file>
+								<name>.settings/org.eclipse.jdt.core.prefs</name>
+								<content><![CDATA[
+eclipse.preferences.version=1
+encoding/src/main/generated=UTF-8
+encoding/src/main/java=UTF-8
+encoding/src/main/resources=UTF-8
+encoding/src/test/generated=UTF-8
+encoding/src/test/java=UTF-8
+encoding/src/test/resources=UTF-8
+org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.6
+org.eclipse.jdt.core.compiler.compliance=1.6
+org.eclipse.jdt.core.compiler.source=1.6
+org.eclipse.jdt.core.formatter.align_type_members_on_columns=false
+org.eclipse.jdt.core.formatter.alignment_for_arguments_in_allocation_expression=16
+org.eclipse.jdt.core.formatter.alignment_for_arguments_in_annotation=0
+org.eclipse.jdt.core.formatter.alignment_for_arguments_in_enum_constant=16
+org.eclipse.jdt.core.formatter.alignment_for_arguments_in_explicit_constructor_call=16
+org.eclipse.jdt.core.formatter.alignment_for_arguments_in_method_invocation=16
+org.eclipse.jdt.core.formatter.alignment_for_arguments_in_qualified_allocation_expression=16
+org.eclipse.jdt.core.formatter.alignment_for_assignment=0
+org.eclipse.jdt.core.formatter.alignment_for_binary_expression=16
+org.eclipse.jdt.core.formatter.alignment_for_compact_if=16
+org.eclipse.jdt.core.formatter.alignment_for_conditional_expression=80
+org.eclipse.jdt.core.formatter.alignment_for_enum_constants=0
+org.eclipse.jdt.core.formatter.alignment_for_expressions_in_array_initializer=16
+org.eclipse.jdt.core.formatter.alignment_for_method_declaration=0
+org.eclipse.jdt.core.formatter.alignment_for_multiple_fields=16
+org.eclipse.jdt.core.formatter.alignment_for_parameters_in_constructor_declaration=16
+org.eclipse.jdt.core.formatter.alignment_for_parameters_in_method_declaration=16
+org.eclipse.jdt.core.formatter.alignment_for_resources_in_try=80
+org.eclipse.jdt.core.formatter.alignment_for_selector_in_method_invocation=16
+org.eclipse.jdt.core.formatter.alignment_for_superclass_in_type_declaration=16
+org.eclipse.jdt.core.formatter.alignment_for_superinterfaces_in_enum_declaration=16
+org.eclipse.jdt.core.formatter.alignment_for_superinterfaces_in_type_declaration=16
+org.eclipse.jdt.core.formatter.alignment_for_throws_clause_in_constructor_declaration=16
+org.eclipse.jdt.core.formatter.alignment_for_throws_clause_in_method_declaration=16
+org.eclipse.jdt.core.formatter.alignment_for_union_type_in_multicatch=16
+org.eclipse.jdt.core.formatter.blank_lines_after_imports=1
+org.eclipse.jdt.core.formatter.blank_lines_after_package=1
+org.eclipse.jdt.core.formatter.blank_lines_before_field=0
+org.eclipse.jdt.core.formatter.blank_lines_before_first_class_body_declaration=0
+org.eclipse.jdt.core.formatter.blank_lines_before_imports=1
+org.eclipse.jdt.core.formatter.blank_lines_before_member_type=1
+org.eclipse.jdt.core.formatter.blank_lines_before_method=1
+org.eclipse.jdt.core.formatter.blank_lines_before_new_chunk=1
+org.eclipse.jdt.core.formatter.blank_lines_before_package=0
+org.eclipse.jdt.core.formatter.blank_lines_between_import_groups=1
+org.eclipse.jdt.core.formatter.blank_lines_between_type_declarations=1
+org.eclipse.jdt.core.formatter.brace_position_for_annotation_type_declaration=end_of_line
+org.eclipse.jdt.core.formatter.brace_position_for_anonymous_type_declaration=end_of_line
+org.eclipse.jdt.core.formatter.brace_position_for_array_initializer=end_of_line
+org.eclipse.jdt.core.formatter.brace_position_for_block=end_of_line
+org.eclipse.jdt.core.formatter.brace_position_for_block_in_case=end_of_line
+org.eclipse.jdt.core.formatter.brace_position_for_constructor_declaration=end_of_line
+org.eclipse.jdt.core.formatter.brace_position_for_enum_constant=end_of_line
+org.eclipse.jdt.core.formatter.brace_position_for_enum_declaration=end_of_line
+org.eclipse.jdt.core.formatter.brace_position_for_method_declaration=end_of_line
+org.eclipse.jdt.core.formatter.brace_position_for_switch=end_of_line
+org.eclipse.jdt.core.formatter.brace_position_for_type_declaration=end_of_line
+org.eclipse.jdt.core.formatter.comment.clear_blank_lines_in_block_comment=false
+org.eclipse.jdt.core.formatter.comment.clear_blank_lines_in_javadoc_comment=false
+org.eclipse.jdt.core.formatter.comment.format_block_comments=true
+org.eclipse.jdt.core.formatter.comment.format_header=false
+org.eclipse.jdt.core.formatter.comment.format_html=true
+org.eclipse.jdt.core.formatter.comment.format_javadoc_comments=true
+org.eclipse.jdt.core.formatter.comment.format_line_comments=true
+org.eclipse.jdt.core.formatter.comment.format_source_code=true
+org.eclipse.jdt.core.formatter.comment.indent_parameter_description=true
+org.eclipse.jdt.core.formatter.comment.indent_root_tags=true
+org.eclipse.jdt.core.formatter.comment.insert_new_line_before_root_tags=insert
+org.eclipse.jdt.core.formatter.comment.insert_new_line_for_parameter=insert
+org.eclipse.jdt.core.formatter.comment.line_length=80
+org.eclipse.jdt.core.formatter.comment.new_lines_at_block_boundaries=true
+org.eclipse.jdt.core.formatter.comment.new_lines_at_javadoc_boundaries=true
+org.eclipse.jdt.core.formatter.comment.preserve_white_space_between_code_and_line_comments=false
+org.eclipse.jdt.core.formatter.compact_else_if=true
+org.eclipse.jdt.core.formatter.continuation_indentation=2
+org.eclipse.jdt.core.formatter.continuation_indentation_for_array_initializer=2
+org.eclipse.jdt.core.formatter.disabling_tag=@formatter\:off
+org.eclipse.jdt.core.formatter.enabling_tag=@formatter\:on
+org.eclipse.jdt.core.formatter.format_guardian_clause_on_one_line=false
+org.eclipse.jdt.core.formatter.format_line_comment_starting_on_first_column=true
+org.eclipse.jdt.core.formatter.indent_body_declarations_compare_to_annotation_declaration_header=true
+org.eclipse.jdt.core.formatter.indent_body_declarations_compare_to_enum_constant_header=true
+org.eclipse.jdt.core.formatter.indent_body_declarations_compare_to_enum_declaration_header=true
+org.eclipse.jdt.core.formatter.indent_body_declarations_compare_to_type_header=true
+org.eclipse.jdt.core.formatter.indent_breaks_compare_to_cases=true
+org.eclipse.jdt.core.formatter.indent_empty_lines=false
+org.eclipse.jdt.core.formatter.indent_statements_compare_to_block=true
+org.eclipse.jdt.core.formatter.indent_statements_compare_to_body=true
+org.eclipse.jdt.core.formatter.indent_switchstatements_compare_to_cases=true
+org.eclipse.jdt.core.formatter.indent_switchstatements_compare_to_switch=false
+org.eclipse.jdt.core.formatter.indentation.size=4
+org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_field=insert
+org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_local_variable=insert
+org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_method=insert
+org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_package=insert
+org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_parameter=do not insert
+org.eclipse.jdt.core.formatter.insert_new_line_after_annotation_on_type=insert
+org.eclipse.jdt.core.formatter.insert_new_line_after_label=do not insert
+org.eclipse.jdt.core.formatter.insert_new_line_after_opening_brace_in_array_initializer=do not insert
+org.eclipse.jdt.core.formatter.insert_new_line_at_end_of_file_if_missing=do not insert
+org.eclipse.jdt.core.formatter.insert_new_line_before_catch_in_try_statement=do not insert
+org.eclipse.jdt.core.formatter.insert_new_line_before_closing_brace_in_array_initializer=do not insert
+org.eclipse.jdt.core.formatter.insert_new_line_before_else_in_if_statement=do not insert
+org.eclipse.jdt.core.formatter.insert_new_line_before_finally_in_try_statement=do not insert
+org.eclipse.jdt.core.formatter.insert_new_line_before_while_in_do_statement=do not insert
+org.eclipse.jdt.core.formatter.insert_new_line_in_empty_annotation_declaration=insert
+org.eclipse.jdt.core.formatter.insert_new_line_in_empty_anonymous_type_declaration=insert
+org.eclipse.jdt.core.formatter.insert_new_line_in_empty_block=insert
+org.eclipse.jdt.core.formatter.insert_new_line_in_empty_enum_constant=insert
+org.eclipse.jdt.core.formatter.insert_new_line_in_empty_enum_declaration=insert
+org.eclipse.jdt.core.formatter.insert_new_line_in_empty_method_body=insert
+org.eclipse.jdt.core.formatter.insert_new_line_in_empty_type_declaration=insert
+org.eclipse.jdt.core.formatter.insert_space_after_and_in_type_parameter=insert
+org.eclipse.jdt.core.formatter.insert_space_after_assignment_operator=insert
+org.eclipse.jdt.core.formatter.insert_space_after_at_in_annotation=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_at_in_annotation_type_declaration=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_binary_operator=insert
+org.eclipse.jdt.core.formatter.insert_space_after_closing_angle_bracket_in_type_arguments=insert
+org.eclipse.jdt.core.formatter.insert_space_after_closing_angle_bracket_in_type_parameters=insert
+org.eclipse.jdt.core.formatter.insert_space_after_closing_brace_in_block=insert
+org.eclipse.jdt.core.formatter.insert_space_after_closing_paren_in_cast=insert
+org.eclipse.jdt.core.formatter.insert_space_after_colon_in_assert=insert
+org.eclipse.jdt.core.formatter.insert_space_after_colon_in_case=insert
+org.eclipse.jdt.core.formatter.insert_space_after_colon_in_conditional=insert
+org.eclipse.jdt.core.formatter.insert_space_after_colon_in_for=insert
+org.eclipse.jdt.core.formatter.insert_space_after_colon_in_labeled_statement=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_allocation_expression=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_annotation=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_array_initializer=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_constructor_declaration_parameters=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_constructor_declaration_throws=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_enum_constant_arguments=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_enum_declarations=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_explicitconstructorcall_arguments=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_for_increments=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_for_inits=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_method_declaration_parameters=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_method_declaration_throws=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_method_invocation_arguments=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_multiple_field_declarations=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_multiple_local_declarations=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_parameterized_type_reference=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_superinterfaces=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_type_arguments=insert
+org.eclipse.jdt.core.formatter.insert_space_after_comma_in_type_parameters=insert
+org.eclipse.jdt.core.formatter.insert_space_after_ellipsis=insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_angle_bracket_in_parameterized_type_reference=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_angle_bracket_in_type_arguments=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_angle_bracket_in_type_parameters=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_brace_in_array_initializer=insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_bracket_in_array_allocation_expression=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_bracket_in_array_reference=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_annotation=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_cast=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_catch=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_constructor_declaration=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_enum_constant=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_for=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_if=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_method_declaration=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_method_invocation=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_parenthesized_expression=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_switch=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_synchronized=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_try=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_opening_paren_in_while=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_postfix_operator=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_prefix_operator=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_question_in_conditional=insert
+org.eclipse.jdt.core.formatter.insert_space_after_question_in_wildcard=do not insert
+org.eclipse.jdt.core.formatter.insert_space_after_semicolon_in_for=insert
+org.eclipse.jdt.core.formatter.insert_space_after_semicolon_in_try_resources=insert
+org.eclipse.jdt.core.formatter.insert_space_after_unary_operator=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_and_in_type_parameter=insert
+org.eclipse.jdt.core.formatter.insert_space_before_assignment_operator=insert
+org.eclipse.jdt.core.formatter.insert_space_before_at_in_annotation_type_declaration=insert
+org.eclipse.jdt.core.formatter.insert_space_before_binary_operator=insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_angle_bracket_in_parameterized_type_reference=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_angle_bracket_in_type_arguments=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_angle_bracket_in_type_parameters=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_brace_in_array_initializer=insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_bracket_in_array_allocation_expression=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_bracket_in_array_reference=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_annotation=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_cast=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_catch=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_constructor_declaration=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_enum_constant=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_for=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_if=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_method_declaration=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_method_invocation=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_parenthesized_expression=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_switch=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_synchronized=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_try=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_closing_paren_in_while=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_colon_in_assert=insert
+org.eclipse.jdt.core.formatter.insert_space_before_colon_in_case=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_colon_in_conditional=insert
+org.eclipse.jdt.core.formatter.insert_space_before_colon_in_default=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_colon_in_for=insert
+org.eclipse.jdt.core.formatter.insert_space_before_colon_in_labeled_statement=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_allocation_expression=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_annotation=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_array_initializer=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_constructor_declaration_parameters=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_constructor_declaration_throws=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_enum_constant_arguments=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_enum_declarations=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_explicitconstructorcall_arguments=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_for_increments=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_for_inits=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_method_declaration_parameters=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_method_declaration_throws=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_method_invocation_arguments=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_multiple_field_declarations=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_multiple_local_declarations=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_parameterized_type_reference=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_superinterfaces=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_type_arguments=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_comma_in_type_parameters=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_ellipsis=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_angle_bracket_in_parameterized_type_reference=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_angle_bracket_in_type_arguments=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_angle_bracket_in_type_parameters=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_annotation_type_declaration=insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_anonymous_type_declaration=insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_array_initializer=insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_block=insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_constructor_declaration=insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_enum_constant=insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_enum_declaration=insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_method_declaration=insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_switch=insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_brace_in_type_declaration=insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_bracket_in_array_allocation_expression=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_bracket_in_array_reference=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_bracket_in_array_type_reference=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_annotation=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_annotation_type_member_declaration=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_catch=insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_constructor_declaration=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_enum_constant=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_for=insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_if=insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_method_declaration=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_method_invocation=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_parenthesized_expression=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_switch=insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_synchronized=insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_try=insert
+org.eclipse.jdt.core.formatter.insert_space_before_opening_paren_in_while=insert
+org.eclipse.jdt.core.formatter.insert_space_before_parenthesized_expression_in_return=insert
+org.eclipse.jdt.core.formatter.insert_space_before_parenthesized_expression_in_throw=insert
+org.eclipse.jdt.core.formatter.insert_space_before_postfix_operator=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_prefix_operator=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_question_in_conditional=insert
+org.eclipse.jdt.core.formatter.insert_space_before_question_in_wildcard=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_semicolon=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_semicolon_in_for=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_semicolon_in_try_resources=do not insert
+org.eclipse.jdt.core.formatter.insert_space_before_unary_operator=do not insert
+org.eclipse.jdt.core.formatter.insert_space_between_brackets_in_array_type_reference=do not insert
+org.eclipse.jdt.core.formatter.insert_space_between_empty_braces_in_array_initializer=do not insert
+org.eclipse.jdt.core.formatter.insert_space_between_empty_brackets_in_array_allocation_expression=do not insert
+org.eclipse.jdt.core.formatter.insert_space_between_empty_parens_in_annotation_type_member_declaration=do not insert
+org.eclipse.jdt.core.formatter.insert_space_between_empty_parens_in_constructor_declaration=do not insert
+org.eclipse.jdt.core.formatter.insert_space_between_empty_parens_in_enum_constant=do not insert
+org.eclipse.jdt.core.formatter.insert_space_between_empty_parens_in_method_declaration=do not insert
+org.eclipse.jdt.core.formatter.insert_space_between_empty_parens_in_method_invocation=do not insert
+org.eclipse.jdt.core.formatter.join_lines_in_comments=true
+org.eclipse.jdt.core.formatter.join_wrapped_lines=true
+org.eclipse.jdt.core.formatter.keep_else_statement_on_same_line=false
+org.eclipse.jdt.core.formatter.keep_empty_array_initializer_on_one_line=false
+org.eclipse.jdt.core.formatter.keep_imple_if_on_one_line=false
+org.eclipse.jdt.core.formatter.keep_then_statement_on_same_line=false
+org.eclipse.jdt.core.formatter.lineSplit=200
+org.eclipse.jdt.core.formatter.never_indent_block_comments_on_first_column=false
+org.eclipse.jdt.core.formatter.never_indent_line_comments_on_first_column=false
+org.eclipse.jdt.core.formatter.number_of_blank_lines_at_beginning_of_method_body=0
+org.eclipse.jdt.core.formatter.number_of_empty_lines_to_preserve=1
+org.eclipse.jdt.core.formatter.put_empty_statement_on_new_line=true
+org.eclipse.jdt.core.formatter.tabulation.char=tab
+org.eclipse.jdt.core.formatter.tabulation.size=4
+org.eclipse.jdt.core.formatter.use_on_off_tags=false
+org.eclipse.jdt.core.formatter.use_tabs_only_for_leading_indentations=false
+org.eclipse.jdt.core.formatter.wrap_before_binary_operator=true
+org.eclipse.jdt.core.formatter.wrap_before_or_operator_multicatch=true
+org.eclipse.jdt.core.formatter.wrap_outer_expressions_when_nested=true
+				                ]]>
+								</content>
+							</file>
+						</additionalConfig>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>cobertura-maven-plugin</artifactId>
+					<version>${maven-cobertura-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>findbugs-maven-plugin</artifactId>
+					<version>${findbugs-maven-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>${maven-antrun-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${maven-release-plugin.version}</version>
+					<configuration>
+						<providerImplementations>
+							<svn>javasvn</svn>
+						</providerImplementations>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>com.google.code.maven-scm-provider-svnjava</groupId>
+							<artifactId>maven-scm-provider-svnjava</artifactId>
+							<version>${maven-scm-provider-svnjava.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>${maven-build-helper-plugin.version}</version>
+					<executions>
+						<execution>
+							<id>add-generated-source</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>add-source</goal>
+							</goals>
+							<configuration>
+								<sources>
+									<source>src/main/generated</source>
+								</sources>
+							</configuration>
+						</execution>
+						<execution>
+							<id>add-generated-test-source</id>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>add-test-source</goal>
+							</goals>
+							<configuration>
+								<sources>
+									<source>src/test/generated</source>
+								</sources>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>com.googlecode.maven-license-validator-plugin</groupId>
+					<artifactId>maven-license-validator-plugin</artifactId>
+					<version>${maven-license-validator-plugin.version}</version>
+				</plugin>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											build-helper-maven-plugin
+										</artifactId>
+										<versionRange>
+											[1.5,)
+										</versionRange>
+										<goals>
+											<goal>add-test-source</goal>
+											<goal>add-source</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<!-- déclaration des plugins -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-scm-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>com.googlecode.maven-license-validator-plugin</groupId>
+				<artifactId>maven-license-validator-plugin</artifactId>
+				<configuration>
+					<verbose>true</verbose>
+					<allowedUnlicensed>
+						<value>com.sqli:myApp-service:jar:.*</value>
+						<value>com.sqli:myApp-webapp:jar:.*</value>
+						<value>com.sqli:myApp-data:jar:.*</value>
+						<value>javax.persistence:persistence-api:jar:.*</value>
+						<value>javassist:javassist:jar:.*</value>
+						<value>com.sun:tools:jar:.*</value>
+						<value>javax.servlet:servlet-api:jar:.*</value>
+						<value>javax.transaction:jta:jar:.*</value>
+						<value>asm:asm-attrs:jar:.*</value>
+						<value>dom4j:dom4j:jar:.*</value>
+						<value>antlr:antlr:jar:.*</value>
+						<value>cglib:cglib:jar:.*</value>
+						<value>asm:asm:jar:.*</value>
+						<value>com.sap.tc:logging:jar:.*</value>
+						<value>commons-collections:commons-collections:jar:.*</value>
+					</allowedUnlicensed>
+					<!-- Only licenses with not a strong copyleft -->
+					<allowedLicenses>
+						<value>Apache 2</value>
+						<value>The Apache Software License, Version 2.0</value>
+						<value>GNU LESSER GENERAL PUBLIC LICENSE</value>
+						<value>MPL 1.1</value>
+						<value>BSD</value>
+						<value>BSD-style license</value>
+						<value>Public Domain</value>
+						<value>Eclipse Public License - v 1.0</value>
+						<value>GNU Lesser General Public License, Version 2.1</value>
+						<value>Common Public License Version 1.0</value>
+						<value>New BSD License</value>
+						<value>HSQLDB License, a BSD open source license</value>
+						<value>MIT License</value>
+						<value>Apache Software Licenses</value>
+						<value>CDDL + GPLv2 with classpath exception</value>
+					</allowedLicenses>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<configuration>
+					<instrumentation>
+						<excludes>
+							<exclude>com/sqli/myApp/**/*Test*.class</exclude>
+						</excludes>
+					</instrumentation>
+					<formats>
+						<format>xml</format>
+					</formats>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>cobertura</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<destDir>target/javadocs</destDir>
+					<tags>
+						<tag>
+							<name>generated</name>
+							<!-- The value X makes javadoc ignoring the tag -->
+							<placement>X</placement>
+						</tag>
+						<tag>
+							<name>requirements</name>
+							<!-- The value X makes javadoc ignoring the tag -->
+							<placement>X</placement>
+						</tag>
+						<tag>
+							<name>requirement</name>
+							<!-- The value X makes javadoc ignoring the tag -->
+							<placement>X</placement>
+						</tag>
+					</tags>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- propriétés sonar -->
+				<sonar.java.coveragePlugin>cobertura</sonar.java.coveragePlugin>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>cobertura-maven-plugin</artifactId>
+						<configuration>
+							<instrumentation>
+								<excludes>
+									<exclude>com/sqli/myApp/**/*Test*.class</exclude>
+								</excludes>
+							</instrumentation>
+							<formats>
+								<format>xml</format>
+							</formats>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>compile</phase>
+								<goals>
+									<goal>cobertura</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- codecov -->
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>0.7.5.201505241946</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>prepare-agent</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>report</id>
+								<phase>test</phase>
+								<goals>
+									<goal>report</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

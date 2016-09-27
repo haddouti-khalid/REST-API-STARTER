@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/security
+          http://www.springframework.org/schema/security/spring-security.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<bean id="httpFilter" class="com.sqli.myApp.filter.HttpFilter" />
+
+	<bean id="expireFilter" class="com.sqli.myApp.filter.ExpireFilter" />
+
+	<beans profile="cors">
+		<bean id="corsFilter" class="com.sqli.myApp.filter.CorsFilter" />
+	</beans>
+
+	<beans profile="!cors">
+		<bean id="corsFilter" class="com.sqli.myApp.filter.NoCorsFilter" />
+	</beans>
+
+	<beans>
+		<security:http use-expressions="true" auto-config="false"
+			create-session="stateless" pattern="/rest-api/**" entry-point-ref="preauthFailedEntryPoint">
+			<security:csrf disabled="true"/>
+			<security:custom-filter position="PRE_AUTH_FILTER"
+				ref="preauthFilter" />
+			<security:intercept-url pattern="/rest-api/**"
+				access="isAuthenticated()" />
+			<security:anonymous />
+		</security:http>
+
+		<bean id="preauthFailedEntryPoint"
+			class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint">
+		</bean>
+
+		<security:authentication-manager
+			alias="authenticationManager">
+			<security:authentication-provider
+				ref="preAuthenticatedAuthenticationProvider" />
+		</security:authentication-manager>
+
+		<bean id="preAuthenticatedAuthenticationProvider"
+			class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider">
+			<property name="preAuthenticatedUserDetailsService">
+				<bean
+					class="com.sqli.myApp.security.authentication.UserDetailsProvider" />
+			</property>
+		</bean>
+	</beans>
+
+	<beans profile="dev">
+		<bean id="devAuthenticationDetailProvider"
+			class="com.sqli.myApp.security.authentication.dev.DevAuthenticationDetailProvider">
+			<property name="principalRequestHeader" value="SPRING_USER_ID" />
+		</bean>
+
+		<bean id="preauthFilter"
+			class="org.springframework.security.web.authentication.preauth.RequestHeaderAuthenticationFilter">
+			<property name="authenticationManager" ref="authenticationManager" />
+			<property name="authenticationDetailsSource" ref="devAuthenticationDetailProvider" />
+			<property name="principalRequestHeader" value="SPRING_USER_ID" />
+		</bean>
+	</beans>
+
+	<beans profile="prod">
+
+		<bean id="prodAuthenticationDetailProvider"
+			class="com.sqli.myApp.security.authentication.ProdAuthenticationDetailProvider" />
+
+		<bean id="preauthFilter"
+			class="org.springframework.security.web.authentication.preauth.j2ee.J2eePreAuthenticatedProcessingFilter">
+			<property name="authenticationManager" ref="authenticationManager" />
+			<property name="authenticationDetailsSource" ref="prodAuthenticationDetailProvider" />
+		</bean>
+	</beans>
+</beans>

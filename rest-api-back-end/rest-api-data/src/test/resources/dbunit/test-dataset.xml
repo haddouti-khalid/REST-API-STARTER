@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+	<Book id="1" title="text-0-1" description="description-1"/>
+	<Book id="2" title="text-0-2" description="description-2"/>
+	<Book id="3" title="text-0-3" description="description-3"/>
+	<Book id="4" title="text-0-4" description="description-4"/>
+	<Book id="5" title="text-0-5" description="description-5"/>
+</dataset>	
