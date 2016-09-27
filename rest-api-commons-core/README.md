@@ -1,3 +1,0 @@
-# Commons core
-
-Core classes
