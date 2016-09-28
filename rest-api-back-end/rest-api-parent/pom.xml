@@ -1013,9 +1013,9 @@ org.eclipse.jdt.core.formatter.wrap_outer_expressions_when_nested=true
 				<configuration>
 					<verbose>true</verbose>
 					<allowedUnlicensed>
-						<value>com.sqli:myApp-service:jar:.*</value>
-						<value>com.sqli:myApp-webapp:jar:.*</value>
-						<value>com.sqli:myApp-data:jar:.*</value>
+						<value>com.sqli:rest-api-service:jar:.*</value>
+						<value>com.sqli:rest-api-webapp:jar:.*</value>
+						<value>com.sqli:rest-api-data:jar:.*</value>
 						<value>javax.persistence:persistence-api:jar:.*</value>
 						<value>javassist:javassist:jar:.*</value>
 						<value>com.sun:tools:jar:.*</value>
@@ -1053,14 +1053,10 @@ org.eclipse.jdt.core.formatter.wrap_outer_expressions_when_nested=true
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
 				<configuration>
-					<instrumentation>
-						<excludes>
-							<exclude>com/sqli/myApp/**/*Test*.class</exclude>
-						</excludes>
-					</instrumentation>
 					<formats>
 						<format>xml</format>
 					</formats>
+					<aggregate>true</aggregate>
 				</configuration>
 				<executions>
 					<execution>
@@ -1121,14 +1117,10 @@ org.eclipse.jdt.core.formatter.wrap_outer_expressions_when_nested=true
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>cobertura-maven-plugin</artifactId>
 						<configuration>
-							<instrumentation>
-								<excludes>
-									<exclude>com/sqli/myApp/**/*Test*.class</exclude>
-								</excludes>
-							</instrumentation>
 							<formats>
 								<format>xml</format>
 							</formats>
+							<aggregate>true</aggregate>
 						</configuration>
 						<executions>
 							<execution>
