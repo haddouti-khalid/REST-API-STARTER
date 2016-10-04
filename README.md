@@ -1,10 +1,10 @@
 # REST-API-STARTER
 [![Build Status](https://travis-ci.org/haddouti-khalid/REST-API-STARTER.svg?branch=master)](https://travis-ci.org/haddouti-khalid/REST-API-STARTER)
-[![codecov](https://codecov.io/gh/haddouti-khalid/REST-API-STARTER/branch/master/graph/badge.svg)](https://codecov.io/gh/haddouti-khalid/REST-API-STARTER)
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/662db2383c764d1da9fca90b4534ce68)](https://www.codacy.com/app/haddouti-khalid/REST-API-STARTER?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=haddouti-khalid/REST-API-STARTER&amp;utm_campaign=Badge_Coverage)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/662db2383c764d1da9fca90b4534ce68)](https://www.codacy.com/app/haddouti-khalid/REST-API-STARTER?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=haddouti-khalid/REST-API-STARTER&amp;utm_campaign=Badge_Grade)
 
-This project is a complet technical solution for achieving a REST API plateform.
-This solution includes :
+This project is a complete technical solution for achieving a REST API.
+This solution includes:
 ```
 * Spring 4.1.7.RELEASE
 * Hibernate 4.3.8.Final
@@ -18,32 +18,32 @@ This solution includes :
 ## Features :
 ### Unit tests
 All application layers are testable (Data, Service, Web) :<br />
-Data layer: all CRUD operations and specific queries are tested through a memory database (DBUnit).<br /> 
+Data layer: all CRUD operations and specific queries are tested through a memory database (DBUnit).<br />
 Service layer: to cover all requirements in tests, it is possible to use Mockito framework to adapt any input data to check the output. <br />
 Web layer: even the web layer is testable with the Spring MVC-test. It allows us to check the REST service results.<br />
 ### Apache Tomcat and MySql integration
 Apache Tomcat is used with a MySql database.<br />
-Database configuration is externalized in Tomcat context file
+Database configuration is externalized in Tomcat context file.<br />
 MySql database driver is externalized in Tomcat.
 ### External configuration
-The  parameters of configuration can be stored in the file system and can be changed with hot reloading.
+The configuration parameters can be stored in the file system and changed with hot reloading.
 ### Multiple-Authentication support
 In development phase, a simple value in http header is used to identify the connected user ( SPRING_USER_ID : roleName )<br />
 In production platform, Tomcat users and roles ( file tomcat-users.xml ) are used.
 ### External logging
-The logging configuration of the application is stored in the file system and can be changed with hot reloading. For example, the logging level can be changed without restart the application.
+The application logging configuration is stored in the file system and can be changed with hot reloading. For example, the logging level can be changed without restarting the application.
 ### Multi profiles
-Application supports two different profiles : DEV and PROD
+The application supports two different profiles (Maven and Sprinf) : DEV and PROD
 ### Security layer
-All user with his roles are managed by the application easily (with a Spring annotation).
+All users (and roles) are managed by the application easily (with a Spring annotation).
 ### Crossdomain queries management
-In development phase, the cross domain check is disabled (a back-end can be used from a web application that is not in the same domain. In production phase, for security reasons, the cross domain check is enabled.
+In development phase, the cross domain check is disabled (a back-end can be used from a web application that is not in the same domain. In production phase, for security reasons, the cross domain check is enabled).
 
 
 ## Setting up your DEV environment:
 ### Prerequisites
 Git, JDK 7 and Maven.<br />
-Be sure that your JAVA_HOME environment variable points to the jdk1.7.0 folder extracted from the JDK download.
+Make sure that your JAVA_HOME environment variable points on the jdk1.7.0 folder extracted from the JDK download.
 ### Steps
 * Clone the repo :
 ```
@@ -51,6 +51,7 @@ Be sure that your JAVA_HOME environment variable points to the jdk1.7.0 folder e
 ```
 * Build projects :
 ```
+	$ cd REST-API-STARTER.git
 	$ mvn clean install -f rest-api-commons-core/pom.xml
 	$ mvn clean install -f rest-api-commons-test/pom.xml
 	$ cd rest-api-back-end/rest-api-parent
@@ -106,11 +107,11 @@ GET     /i18n/?              	i18nController.get
 GET     /configurations/?     	configurationController.get
 ```
 ## Commands:
-* Package the application for Dev
+* To packaging the application in Dev profile :
 ```
 mvn clean install
 ```
-* Package the application for Prod
+* To packaging the application in Prod profile :
 ```
 mvn clean install -Ppackage
 ```
